@@ -133,20 +133,22 @@ def get_names(obj):
 
 def next_available(obj,name):
     soup = make_soup(obj)
-    
-    dd = soup.find(attrs={"class":"vjs-duration-display"})
-    exep = True
-    if dd:
-        m =  tosec(dd.text[-5:])
-        n =  tosec(soup.find(attrs={"class":"vjs-current-time"}).text[-9:-4])
-        exep = 0<=(m-n)<=1
 
     curr = None
     for x in soup.find_all('p'):
         if x.text == name:
             curr = x 
             break
-    if not curr: return not ("disabled" in soup.find(attrs={"name":"Next"}).attrs) and exep
+            
+    if not curr:
+        dd = soup.find(attrs={"class":"vjs-duration-display"})
+        exep = True
+        if dd:
+            m =  tosec(dd.text[-5:])
+            n =  tosec(soup.find(attrs={"class":"vjs-current-time"}).text[-9:-4])
+            exep = 0<=(m-n)<=1
+        
+        return not ("disabled" in soup.find(attrs={"name":"Next"}).attrs) and exep
     
     i = curr.parent.find('i')
     return (i and i.attrs['data-icon-name'] == "Accept")
