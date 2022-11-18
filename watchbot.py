@@ -1,6 +1,6 @@
 from bothandle import Browser
 import re
-#from beepy import beep
+# from beepy import beep
 from bs4 import BeautifulSoup as BSP
 from time import sleep, time
 from assessment_data import answers
@@ -49,8 +49,8 @@ class WatchBot:
                 names.pop(0)
                 self.web.click("Next")
                 sleep(1)
-            elif names[0] == "Assessment":
-                #beep(sound=5)
+            elif "Assessment" in names[0]:
+                #beep(sound=3)
                 handle_assessment(self.web,self.uname,cl,answers.get(cl,'NAN'))
                 break
             else:
@@ -149,7 +149,7 @@ def next_available(obj,name):
     if not curr: return not ("disabled" in soup.find(attrs={"name":"Next"}).attrs) and exep
     
     i = curr.parent.find('i')
-    return (i and i.attrs['data-icon-name'] == "Accept") and exep
+    return (i and i.attrs['data-icon-name'] == "Accept")
 
 def sleep_until_video_ends(obj,name):
     # Video time
