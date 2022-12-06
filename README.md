@@ -2,7 +2,6 @@
 An automated web bot that completes video lessons in 4x speed.
 
 ## How to run watchBOT ?
-Kasu kudu 50rs.
 [WatchBOT Setup Instructions](https://www.youtube.com/watch?v=p7YXXieghto)
 
 
